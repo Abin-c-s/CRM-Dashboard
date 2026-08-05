@@ -1,7 +1,12 @@
-import React from 'react'
+export type CustomerStatus = "active" | "inactive" ;
 
-function customer() {
-  return React.createElement('div', null, 'customer')
+export interface Customer {
+  id: string;
+  name: string;
+  email: string;
+  phone: string;
+  status: CustomerStatus;
+  company: string;
+  lastContact: string;
+  notes?: string;
 }
-
-export default customer
