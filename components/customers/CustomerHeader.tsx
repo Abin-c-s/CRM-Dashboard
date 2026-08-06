@@ -12,6 +12,10 @@ interface Props {
   setSearch: React.Dispatch<React.SetStateAction<string>>;
   customers: Customer[];
   setCustomers: React.Dispatch<React.SetStateAction<Customer[]>>;
+  sortBy: string;
+  setSortBy: React.Dispatch<React.SetStateAction<string>>;
+  statusFilter: string;
+  setStatusFilter: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export default function CustomerHeader({
@@ -19,6 +23,10 @@ export default function CustomerHeader({
   setSearch,
   customers,
   setCustomers,
+  sortBy,
+  setSortBy,
+  statusFilter,
+  setStatusFilter,
 }: Props) {
   return (
     <div className="mb-6 space-y-4">
@@ -35,10 +43,34 @@ export default function CustomerHeader({
         </div>
 
         <div className="flex flex-wrap gap-2">
-          <Button variant="outline">
-            <Filter className="mr-2 h-4 w-4" />
-            Filter
-          </Button>
+          <select
+            value={sortBy}
+            onChange={(e) => setSortBy(e.target.value)}
+            className="rounded-md border p-2 text-sm"
+          >
+            <option value="">Sort By</option>
+
+            <option value="name">
+              Name (A-Z)
+            </option>
+
+            <option value="company">
+              Company
+            </option>
+
+            <option value="date">
+              Last Contact
+            </option>
+          </select>
+          <select
+            value={statusFilter}
+            onChange={(e) => setStatusFilter(e.target.value)}
+            className="rounded-md border p-2"
+          >
+            <option value="all">All Status</option>
+            <option value="active">Active</option>
+            <option value="inactive">Inactive</option>
+          </select>
 
           <AddCustomerDialog
             customers={customers}

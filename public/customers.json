@@ -1,0 +1,202 @@
+[
+  {
+    "id": "1",
+    "name": "John Doe",
+    "email": "john@example.com",
+    "phone": "9876543210",
+    "company": "Google",
+    "status": "active",
+    "lastContact": "2025-08-01",
+    "notes": "Premium customer"
+  },
+  {
+    "id": "2",
+    "name": "Sarah Johnson",
+    "email": "sarah@example.com",
+    "phone": "9876543211",
+    "company": "Microsoft",
+    "status": "inactive",
+    "lastContact": "2025-08-03",
+    "notes": ""
+  },
+  {
+    "id": "3",
+    "name": "Michael Brown",
+    "email": "michael@example.com",
+    "phone": "9876543212",
+    "company": "Amazon",
+    "status": "active",
+    "lastContact": "2025-08-05",
+    "notes": ""
+  },
+  {
+    "id": "4",
+    "name": "Emma Wilson",
+    "email": "emma@example.com",
+    "phone": "9876543213",
+    "company": "Meta",
+    "status": "active",
+    "lastContact": "2025-08-06",
+    "notes": ""
+  },
+  {
+    "id": "5",
+    "name": "David Lee",
+    "email": "david@example.com",
+    "phone": "9876543214",
+    "company": "Netflix",
+    "status": "inactive",
+    "lastContact": "2025-08-08",
+    "notes": ""
+  },
+  {
+    "id": "6",
+    "name": "Sophia Martin",
+    "email": "sophia@example.com",
+    "phone": "9876543215",
+    "company": "Tesla",
+    "status": "active",
+    "lastContact": "2025-08-10",
+    "notes": ""
+  },
+  {
+    "id": "7",
+    "name": "James Clark",
+    "email": "james@example.com",
+    "phone": "9876543216",
+    "company": "Adobe",
+    "status": "active",
+    "lastContact": "2025-08-12",
+    "notes": ""
+  },
+  {
+    "id": "8",
+    "name": "Olivia Harris",
+    "email": "olivia@example.com",
+    "phone": "9876543217",
+    "company": "IBM",
+    "status": "inactive",
+    "lastContact": "2025-08-14",
+    "notes": ""
+  },
+  {
+    "id": "9",
+    "name": "Daniel White",
+    "email": "daniel@example.com",
+    "phone": "9876543218",
+    "company": "Oracle",
+    "status": "active",
+    "lastContact": "2025-08-16",
+    "notes": ""
+  },
+  {
+    "id": "10",
+    "name": "Charlotte King",
+    "email": "charlotte@example.com",
+    "phone": "9876543219",
+    "company": "Apple",
+    "status": "active",
+    "lastContact": "2025-08-18",
+    "notes": ""
+  },
+  {
+    "id": "11",
+    "name": "Ethan Walker",
+    "email": "ethan@example.com",
+    "phone": "9876543220",
+    "company": "Intel",
+    "status": "inactive",
+    "lastContact": "2025-08-20",
+    "notes": ""
+  },
+  {
+    "id": "12",
+    "name": "Amelia Scott",
+    "email": "amelia@example.com",
+    "phone": "9876543221",
+    "company": "Cisco",
+    "status": "active",
+    "lastContact": "2025-08-21",
+    "notes": ""
+  },
+  {
+    "id": "13",
+    "name": "Henry Adams",
+    "email": "henry@example.com",
+    "phone": "9876543222",
+    "company": "Spotify",
+    "status": "active",
+    "lastContact": "2025-08-22",
+    "notes": ""
+  },
+  {
+    "id": "14",
+    "name": "Grace Turner",
+    "email": "grace@example.com",
+    "phone": "9876543223",
+    "company": "PayPal",
+    "status": "inactive",
+    "lastContact": "2025-08-23",
+    "notes": ""
+  },
+  {
+    "id": "15",
+    "name": "Benjamin Hall",
+    "email": "ben@example.com",
+    "phone": "9876543224",
+    "company": "Samsung",
+    "status": "active",
+    "lastContact": "2025-08-24",
+    "notes": ""
+  },
+  {
+    "id": "16",
+    "name": "Mia Young",
+    "email": "mia@example.com",
+    "phone": "9876543225",
+    "company": "Sony",
+    "status": "active",
+    "lastContact": "2025-08-25",
+    "notes": ""
+  },
+  {
+    "id": "17",
+    "name": "Lucas Green",
+    "email": "lucas@example.com",
+    "phone": "9876543226",
+    "company": "Dell",
+    "status": "inactive",
+    "lastContact": "2025-08-26",
+    "notes": ""
+  },
+  {
+    "id": "18",
+    "name": "Harper Baker",
+    "email": "harper@example.com",
+    "phone": "9876543227",
+    "company": "HP",
+    "status": "active",
+    "lastContact": "2025-08-27",
+    "notes": ""
+  },
+  {
+    "id": "19",
+    "name": "Jack Cooper",
+    "email": "jack@example.com",
+    "phone": "9876543228",
+    "company": "Lenovo",
+    "status": "active",
+    "lastContact": "2025-08-28",
+    "notes": ""
+  },
+  {
+    "id": "20",
+    "name": "Lily Carter",
+    "email": "lily@example.com",
+    "phone": "9876543229",
+    "company": "Asus",
+    "status": "inactive",
+    "lastContact": "2025-08-29",
+    "notes": ""
+  }
+]

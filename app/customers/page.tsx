@@ -6,32 +6,19 @@ import DashboardLayout from "@/components/layout/DashboardLayout";
 import CustomerHeader from "@/components/customers/CustomerHeader";
 import CustomerTable from "@/components/customers/CustomerTable";
 
-import customersData from "@/mock/customers.json";
-import { Customer } from "@/types/customer";
+import { useCustomers } from "@/hooks/useCustomers";
 
 export default function CustomersPage() {
+  const { customers, setCustomers } = useCustomers();
+
   const [search, setSearch] = useState("");
-
-  const [customers, setCustomers] = useState<Customer[]>([]);
-
-  useEffect(() => {
-    const storedCustomers = localStorage.getItem("customers");
-
-    if (storedCustomers) {
-      setCustomers(JSON.parse(storedCustomers));
-    } else {
-      setCustomers(customersData as Customer[]);
-    }
-  }, []);
+  const [sortBy, setSortBy] = useState("");
+  const [statusFilter, setStatusFilter] = useState("all");
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
-    if (customers.length > 0) {
-      localStorage.setItem(
-        "customers",
-        JSON.stringify(customers)
-      );
-    }
-  }, [customers]);
+    setCurrentPage(1);
+  }, [search, sortBy, statusFilter]);
 
   return (
     <DashboardLayout>
@@ -40,12 +27,20 @@ export default function CustomersPage() {
         setSearch={setSearch}
         customers={customers}
         setCustomers={setCustomers}
+        sortBy={sortBy}
+        setSortBy={setSortBy}
+        statusFilter={statusFilter}
+        setStatusFilter={setStatusFilter}
       />
 
       <CustomerTable
         customers={customers}
         setCustomers={setCustomers}
         search={search}
+        sortBy={sortBy}
+        statusFilter={statusFilter}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
       />
     </DashboardLayout>
   );

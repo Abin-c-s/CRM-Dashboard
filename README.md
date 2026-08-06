@@ -1,36 +1,118 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# CRM Dashboard
 
-## Getting Started
+A responsive Customer Relationship Management (CRM) Dashboard built with **Next.js 15**, **TypeScript**, **Tailwind CSS**, and **shadcn/ui**.
 
-First, run the development server:
+## 🚀 Features
+
+- Dashboard with customer statistics
+- Customer CRUD (Create, Read, Update, Delete)
+- Search customers
+- Sort customers (Name, Company, Last Contact)
+- Filter customers (All, Active, Inactive)
+- Pagination
+- Responsive design (Desktop, Tablet & Mobile)
+- Form validation using React Hook Form + Zod
+- Local Storage persistence
+- Fetch API data loading from `public/customers.json`
+
+---
+
+## 🛠️ Tech Stack
+
+- Next.js 15
+- React
+- TypeScript
+- Tailwind CSS
+- shadcn/ui
+- React Hook Form
+- Zod
+- Lucide Icons
+
+---
+
+## 📂 Folder Structure
+
+```
+app/
+components/
+hooks/
+lib/
+public/
+types/
+```
+
+---
+
+## 📦 Installation
+
+Clone the repository
+
+```bash
+git clone https://github.com/Abin-c-s/CRM-Dashboard.git
+```
+
+Go to the project folder
+
+```bash
+cd CRM-Dashboard
+```
+
+Install dependencies
+
+```bash
+npm install
+```
+
+Run the development server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Build for production
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run build
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 💾 Data Handling
 
-To learn more about Next.js, take a look at the following resources:
+- Initial customer data is fetched using the Fetch API from `public/customers.json`.
+- Customer CRUD operations are persisted using Local Storage.
+- Data remains available after page refresh.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 📱 Responsive Design
 
-## Deploy on Vercel
+The application is fully responsive and optimized for:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Desktop
+- Tablet
+- Mobile
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## 📸 Features Included
+
+- Dashboard Statistics
+- Customer Management
+- Add Customer
+- Edit Customer
+- Delete Customer
+- Search
+- Sort
+- Filter
+- Pagination
+- Empty State
+- Form Validation
+
+---
+
+## 👨‍💻 Author
+
+**Abin C S**
+
+GitHub: https://github.com/Abin-c-s
