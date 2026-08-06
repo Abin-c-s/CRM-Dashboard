@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -8,31 +9,57 @@ import {
   CustomerFormData,
 } from "@/lib/customerSchema";
 
+import { Customer } from "@/types/customer";
+
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 
 interface Props {
   closeDialog: () => void;
+  onSave: (data: CustomerFormData) => void;
+  customer?: Customer;
+  isEdit?: boolean;
 }
 
-export default function CustomerForm({ closeDialog }: Props) {
+export default function CustomerForm({
+  closeDialog,
+  onSave,
+  customer,
+  isEdit = false,
+}: Props) {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<CustomerFormData>({
     resolver: zodResolver(customerSchema),
     defaultValues: {
+      name: "",
+      email: "",
+      phone: "",
+      company: "",
       status: "active",
+      notes: "",
     },
   });
 
+  useEffect(() => {
+    if (customer) {
+      reset({
+        name: customer.name,
+        email: customer.email,
+        phone: customer.phone,
+        company: customer.company,
+        status: customer.status,
+        notes: customer.notes || "",
+      });
+    }
+  }, [customer, reset]);
+
   const onSubmit = (data: CustomerFormData) => {
-    console.log(data);
-
-    alert("Customer Added Successfully");
-
+    onSave(data);
     closeDialog();
   };
 
@@ -42,49 +69,81 @@ export default function CustomerForm({ closeDialog }: Props) {
       className="space-y-4"
     >
       <div>
+        <label className="block text-sm font-medium mb-1">
+          Customer Name
+        </label>
+
         <Input
-          placeholder="Customer Name"
+          placeholder="Enter customer name"
           {...register("name")}
         />
-        <p className="text-red-500 text-sm">
-          {errors.name?.message}
-        </p>
+
+        {errors.name && (
+          <p className="text-sm text-red-500 mt-1">
+            {errors.name.message}
+          </p>
+        )}
       </div>
 
       <div>
+        <label className="block text-sm font-medium mb-1">
+          Email
+        </label>
+
         <Input
-          placeholder="Email"
+          placeholder="Enter email"
           {...register("email")}
         />
-        <p className="text-red-500 text-sm">
-          {errors.email?.message}
-        </p>
+
+        {errors.email && (
+          <p className="text-sm text-red-500 mt-1">
+            {errors.email.message}
+          </p>
+        )}
       </div>
 
       <div>
+        <label className="block text-sm font-medium mb-1">
+          Phone
+        </label>
+
         <Input
-          placeholder="Phone"
+          placeholder="Enter phone number"
           {...register("phone")}
         />
-        <p className="text-red-500 text-sm">
-          {errors.phone?.message}
-        </p>
+
+        {errors.phone && (
+          <p className="text-sm text-red-500 mt-1">
+            {errors.phone.message}
+          </p>
+        )}
       </div>
 
       <div>
+        <label className="block text-sm font-medium mb-1">
+          Company
+        </label>
+
         <Input
-          placeholder="Company"
+          placeholder="Enter company"
           {...register("company")}
         />
-        <p className="text-red-500 text-sm">
-          {errors.company?.message}
-        </p>
+
+        {errors.company && (
+          <p className="text-sm text-red-500 mt-1">
+            {errors.company.message}
+          </p>
+        )}
       </div>
 
       <div>
+        <label className="block text-sm font-medium mb-1">
+          Status
+        </label>
+
         <select
           {...register("status")}
-          className="w-full border rounded-md p-2"
+          className="w-full rounded-md border p-2"
         >
           <option value="active">Active</option>
           <option value="inactive">Inactive</option>
@@ -92,8 +151,12 @@ export default function CustomerForm({ closeDialog }: Props) {
       </div>
 
       <div>
+        <label className="block text-sm font-medium mb-1">
+          Notes
+        </label>
+
         <Textarea
-          placeholder="Notes"
+          placeholder="Enter notes"
           {...register("notes")}
         />
       </div>
@@ -108,7 +171,7 @@ export default function CustomerForm({ closeDialog }: Props) {
         </Button>
 
         <Button type="submit">
-          Save Customer
+          {isEdit ? "Update Customer" : "Save Customer"}
         </Button>
       </div>
     </form>

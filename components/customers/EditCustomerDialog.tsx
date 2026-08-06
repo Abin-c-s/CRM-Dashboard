@@ -15,47 +15,54 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 
-import { Plus } from "lucide-react";
-
 interface Props {
+  customer: Customer;
   customers: Customer[];
   setCustomers: React.Dispatch<React.SetStateAction<Customer[]>>;
 }
 
-export default function AddCustomerDialog({
+export default function EditCustomerDialog({
+  customer,
   customers,
   setCustomers,
 }: Props) {
   const [open, setOpen] = useState(false);
 
-  function handleAddCustomer(data: CustomerFormData) {
-    const newCustomer: Customer = {
-      id: Date.now().toString(),
+  function handleUpdateCustomer(data: CustomerFormData) {
+    const updatedCustomer: Customer = {
+      ...customer,
       ...data,
-      lastContact: new Date().toISOString().split("T")[0],
     };
 
-    setCustomers([...customers, newCustomer]);
+    const updatedCustomers = customers.map((item) =>
+      item.id === customer.id ? updatedCustomer : item
+    );
 
+    setCustomers(updatedCustomers);
     setOpen(false);
   }
 
   return (
     <>
-      <Button onClick={() => setOpen(true)}>
-        <Plus className="mr-2 h-4 w-4" />
-        Add Customer
+      <Button
+        variant="outline"
+        size="sm"
+        onClick={() => setOpen(true)}
+      >
+        Edit
       </Button>
 
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent className="sm:max-w-lg">
           <DialogHeader>
-            <DialogTitle>Add Customer</DialogTitle>
+            <DialogTitle>Edit Customer</DialogTitle>
           </DialogHeader>
 
           <CustomerForm
+            customer={customer}
+            isEdit={true}
             closeDialog={() => setOpen(false)}
-            onSave={handleAddCustomer}
+            onSave={handleUpdateCustomer}
           />
         </DialogContent>
       </Dialog>

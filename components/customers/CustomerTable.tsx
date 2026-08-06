@@ -1,8 +1,7 @@
 "use client";
 
-import { useMemo, useState } from "react";
-import { useCustomers } from "@/hooks/useCustomers";
-import SearchBar from "@/components/search/SearchBar";
+import { Customer } from "@/types/customer";
+import { Badge } from "@/components/ui/badge";
 import {
   Table,
   TableBody,
@@ -11,147 +10,106 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Badge } from "@/components/ui/badge";
 
-export default function CustomerTable() {
-  const { data: customers = [], isLoading, error } = useCustomers();
+import EditCustomerDialog from "./EditCustomerDialog";
+import DeleteCustomerDialog from "./DeleteCustomerDialog";
 
-  const [search, setSearch] = useState("");
+interface Props {
+  customers: Customer[];
+  setCustomers: React.Dispatch<React.SetStateAction<Customer[]>>;
+  search: string;
+}
 
-  const filteredCustomers = useMemo(() => {
+export default function CustomerTable({
+  customers,
+  setCustomers,
+  search,
+}: Props) {
+  const filteredCustomers = customers.filter((customer) => {
     const query = search.toLowerCase();
 
-    return customers.filter((customer) => {
-      return (
-        customer.name.toLowerCase().includes(query) ||
-        customer.email.toLowerCase().includes(query) ||
-        customer.company.toLowerCase().includes(query) ||
-        customer.phone.toLowerCase().includes(query)
-      );
-    });
-  }, [customers, search]);
-
-  if (isLoading) {
     return (
-      <div className="text-center py-10">
-        Loading Customers...
-      </div>
+      customer.name.toLowerCase().includes(query) ||
+      customer.email.toLowerCase().includes(query) ||
+      customer.company.toLowerCase().includes(query) ||
+      customer.phone.toLowerCase().includes(query)
     );
-  }
-
-  if (error) {
-    return (
-      <div className="text-center text-red-500 py-10">
-        Something went wrong.
-      </div>
-    );
-  }
+  });
 
   return (
-    <div className="space-y-5">
+    <div className="rounded-lg border bg-white">
+      <Table>
+        <TableHeader>
+          <TableRow>
+            <TableHead>Name</TableHead>
+            <TableHead>Email</TableHead>
+            <TableHead>Company</TableHead>
+            <TableHead>Status</TableHead>
+            <TableHead>Last Contact</TableHead>
+            <TableHead>Actions</TableHead>
+          </TableRow>
+        </TableHeader>
 
-      <div className="flex justify-between items-center">
-
-        <SearchBar
-          value={search}
-          onChange={setSearch}
-        />
-
-      </div>
-
-      <div className="rounded-lg border bg-white">
-
-        <Table>
-
-          <TableHeader>
-
+        <TableBody>
+          {filteredCustomers.length === 0 ? (
             <TableRow>
-
-              <TableHead>Name</TableHead>
-
-              <TableHead>Email</TableHead>
-
-              <TableHead>Phone</TableHead>
-
-              <TableHead>Company</TableHead>
-
-              <TableHead>Status</TableHead>
-
-              <TableHead>Last Contact</TableHead>
-
+              <TableCell
+                colSpan={6}
+                className="text-center py-8"
+              >
+                No customers found
+              </TableCell>
             </TableRow>
-
-          </TableHeader>
-
-          <TableBody>
-
-            {filteredCustomers.length === 0 ? (
-
-              <TableRow>
-
-                <TableCell
-                  colSpan={6}
-                  className="text-center py-8"
-                >
-                  No Customers Found
+          ) : (
+            filteredCustomers.map((customer) => (
+              <TableRow
+                key={customer.id}
+                className="hover:bg-gray-50"
+              >
+                <TableCell className="font-medium">
+                  {customer.name}
                 </TableCell>
 
+                <TableCell>{customer.email}</TableCell>
+
+                <TableCell>{customer.company}</TableCell>
+
+                <TableCell>
+                  <Badge
+                    variant={
+                      customer.status === "active"
+                        ? "default"
+                        : "secondary"
+                    }
+                  >
+                    {customer.status}
+                  </Badge>
+                </TableCell>
+
+                <TableCell>
+                  {customer.lastContact}
+                </TableCell>
+
+                <TableCell>
+                  <div className="flex gap-2">
+                    <EditCustomerDialog
+                      customer={customer}
+                      customers={customers}
+                      setCustomers={setCustomers}
+                    />
+
+                    <DeleteCustomerDialog
+                      customerId={customer.id}
+                      customers={customers}
+                      setCustomers={setCustomers}
+                    />
+                  </div>
+                </TableCell>
               </TableRow>
-
-            ) : (
-
-              filteredCustomers.map((customer) => (
-
-                <TableRow
-                  key={customer.id}
-                >
-
-                  <TableCell className="font-medium">
-                    {customer.name}
-                  </TableCell>
-
-                  <TableCell>
-                    {customer.email}
-                  </TableCell>
-
-                  <TableCell>
-                    {customer.phone}
-                  </TableCell>
-
-                  <TableCell>
-                    {customer.company}
-                  </TableCell>
-
-                  <TableCell>
-
-                    <Badge
-                      className={
-                        customer.status === "active"
-                          ? "bg-green-500 hover:bg-green-600"
-                          : "bg-red-500 hover:bg-red-600"
-                      }
-                    >
-                      {customer.status}
-                    </Badge>
-
-                  </TableCell>
-
-                  <TableCell>
-                    {customer.lastContact}
-                  </TableCell>
-
-                </TableRow>
-
-              ))
-
-            )}
-
-          </TableBody>
-
-        </Table>
-
-      </div>
-
+            ))
+          )}
+        </TableBody>
+      </Table>
     </div>
   );
 }

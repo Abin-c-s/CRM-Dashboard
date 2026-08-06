@@ -1,14 +1,35 @@
+"use client";
+
+import { useState } from "react";
+
 import DashboardLayout from "@/components/layout/DashboardLayout";
+import CustomerHeader from "@/components/customers/CustomerHeader";
 import CustomerTable from "@/components/customers/CustomerTable";
 
+import customersData from "@/mock/customers.json";
+import { Customer } from "@/types/customer";
+
 export default function CustomersPage() {
+  const [search, setSearch] = useState("");
+
+  const [customers, setCustomers] = useState<Customer[]>(
+    customersData as Customer[]
+  );
+
   return (
     <DashboardLayout>
-      <div className="space-y-6">
-        <h1 className="text-3xl font-bold">Customers</h1>
+      <CustomerHeader
+        search={search}
+        setSearch={setSearch}
+        customers={customers}
+        setCustomers={setCustomers}
+      />
 
-        <CustomerTable />
-      </div>
+      <CustomerTable
+        customers={customers}
+        setCustomers={setCustomers}
+        search={search}
+      />
     </DashboardLayout>
   );
 }
