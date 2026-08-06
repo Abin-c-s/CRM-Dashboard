@@ -12,6 +12,7 @@ import {
   DialogTitle,
   DialogFooter,
 } from "@/components/ui/dialog";
+import { toast } from "sonner";
 
 interface Props {
   customerId: string;
@@ -27,13 +28,16 @@ export default function DeleteCustomerDialog({
   const [open, setOpen] = useState(false);
 
   function handleDelete() {
-    const updatedCustomers = customers.filter(
-      (customer) => customer.id !== customerId
-    );
+  const updatedCustomers = customers.filter(
+    (customer) => customer.id !== customerId
+  );
 
-    setCustomers(updatedCustomers);
-    setOpen(false);
-  }
+  setCustomers(updatedCustomers);
+
+  toast.success("Customer deleted successfully!");
+
+  setOpen(false);
+}
 
   return (
     <>

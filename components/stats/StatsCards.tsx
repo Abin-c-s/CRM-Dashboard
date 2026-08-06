@@ -1,66 +1,72 @@
-import { Card, CardContent } from "@/components/ui/card";
-import {
-  Users,
-  UserCheck,
-  UserX,
-  TrendingUp,
-} from "lucide-react";
+"use client";
 
-const cards = [
-  {
-    title: "Total Customers",
-    value: "148",
-    icon: Users,
-  },
-  {
-    title: "Active",
-    value: "112",
-    icon: UserCheck,
-  },
-  {
-    title: "Inactive",
-    value: "36",
-    icon: UserX,
-  },
-  {
-    title: "This Month",
-    value: "12",
-    icon: TrendingUp,
-  },
-];
+import { Users, UserCheck, UserX } from "lucide-react";
+import { Customer } from "@/types/customer";
 
-export default function StatsCards() {
+interface Props {
+  customers: Customer[];
+}
+
+export default function StatsCards({
+  customers,
+}: Props) {
+  const total = customers.length;
+
+  const active = customers.filter(
+    (customer) => customer.status === "active"
+  ).length;
+
+  const inactive = customers.filter(
+    (customer) => customer.status === "inactive"
+  ).length;
+
+  const cards = [
+    {
+      title: "Total Customers",
+      value: total,
+      icon: Users,
+      color: "text-blue-600",
+    },
+    {
+      title: "Active Customers",
+      value: active,
+      icon: UserCheck,
+      color: "text-green-600",
+    },
+    {
+      title: "Inactive Customers",
+      value: inactive,
+      icon: UserX,
+      color: "text-red-600",
+    },
+  ];
+
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5 mb-6">
-
+    <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
       {cards.map((card) => {
         const Icon = card.icon;
 
         return (
-          <Card key={card.title}>
-
-            <CardContent className="flex justify-between items-center p-6">
-
+          <div
+            key={card.title}
+            className="rounded-xl bg-white p-6 shadow-sm transition hover:shadow-md"
+          >
+            <div className="flex items-center justify-between">
               <div>
-
                 <p className="text-sm text-gray-500">
                   {card.title}
                 </p>
 
-                <h2 className="text-3xl font-bold mt-2">
+                <h2 className="mt-2 text-3xl font-bold">
                   {card.value}
                 </h2>
-
               </div>
 
               <Icon
-                className="text-blue-600"
-                size={30}
+                className={`h-10 w-10 ${card.color}`}
               />
-
-            </CardContent>
-
-          </Card>
+            </div>
+          </div>
         );
       })}
     </div>

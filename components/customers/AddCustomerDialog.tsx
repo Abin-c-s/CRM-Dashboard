@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/dialog";
 
 import { Plus } from "lucide-react";
+import { toast } from "sonner";
 
 interface Props {
   customers: Customer[];
@@ -29,16 +30,18 @@ export default function AddCustomerDialog({
   const [open, setOpen] = useState(false);
 
   function handleAddCustomer(data: CustomerFormData) {
-    const newCustomer: Customer = {
-      id: Date.now().toString(),
-      ...data,
-      lastContact: new Date().toISOString().split("T")[0],
-    };
+  const newCustomer: Customer = {
+    id: Date.now().toString(),
+    ...data,
+    lastContact: new Date().toISOString().split("T")[0],
+  };
 
-    setCustomers([...customers, newCustomer]);
+  setCustomers([...customers, newCustomer]);
 
-    setOpen(false);
-  }
+  toast.success("Customer added successfully!");
+
+  setOpen(false);
+}
 
   return (
     <>

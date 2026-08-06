@@ -108,8 +108,15 @@ export default function CustomerForm({
         </label>
 
         <Input
+          type="tel"
           placeholder="Enter phone number"
+          maxLength={10}
           {...register("phone")}
+          onInput={(e) => {
+            e.currentTarget.value = e.currentTarget.value
+              .replace(/\D/g, "")
+              .slice(0, 10);
+          }}
         />
 
         {errors.phone && (

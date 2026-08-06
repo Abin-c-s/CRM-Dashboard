@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import DashboardLayout from "@/components/layout/DashboardLayout";
 import CustomerHeader from "@/components/customers/CustomerHeader";
@@ -12,9 +12,26 @@ import { Customer } from "@/types/customer";
 export default function CustomersPage() {
   const [search, setSearch] = useState("");
 
-  const [customers, setCustomers] = useState<Customer[]>(
-    customersData as Customer[]
-  );
+  const [customers, setCustomers] = useState<Customer[]>([]);
+
+  useEffect(() => {
+    const storedCustomers = localStorage.getItem("customers");
+
+    if (storedCustomers) {
+      setCustomers(JSON.parse(storedCustomers));
+    } else {
+      setCustomers(customersData as Customer[]);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (customers.length > 0) {
+      localStorage.setItem(
+        "customers",
+        JSON.stringify(customers)
+      );
+    }
+  }, [customers]);
 
   return (
     <DashboardLayout>

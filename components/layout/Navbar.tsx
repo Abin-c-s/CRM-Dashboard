@@ -1,40 +1,39 @@
 "use client";
 
-import { Bell, Search } from "lucide-react";
-import { Input } from "@/components/ui/input";
+import { Bell, Menu } from "lucide-react";
 
-export default function Navbar() {
+interface Props {
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export default function Navbar({ setOpen }: Props) {
   return (
-    <header className="h-16 border-b flex items-center justify-between px-6 bg-white">
+    <header className="sticky top-0 z-30 flex h-16 items-center justify-between border-b bg-white px-4 md:px-6">
 
-      <h2 className="text-2xl font-bold">
-        CRM Dashboard
-      </h2>
+      <div className="flex items-center gap-3">
 
-      <div className="flex items-center gap-5">
+        <button
+          onClick={() => setOpen(true)}
+          className="md:hidden"
+        >
+          <Menu className="h-6 w-6" />
+        </button>
 
-        <div className="relative">
+        <h1 className="text-xl font-bold md:text-2xl">
+          CRM Dashboard
+        </h1>
 
-          <Search
-            className="absolute left-3 top-3 text-gray-500"
-            size={18}
-          />
+      </div>
 
-          <Input
-            placeholder="Search customers..."
-            className="pl-10 w-72"
-          />
+      <div className="flex items-center gap-4">
 
-        </div>
+        <Bell className="h-5 w-5 cursor-pointer" />
 
-        <Bell className="cursor-pointer" />
-
-        <div className="h-10 w-10 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold">
+        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-600 font-bold text-white">
           A
         </div>
 
       </div>
-
     </header>
   );
 }

@@ -14,6 +14,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { toast } from "sonner";
 
 interface Props {
   customer: Customer;
@@ -29,18 +30,21 @@ export default function EditCustomerDialog({
   const [open, setOpen] = useState(false);
 
   function handleUpdateCustomer(data: CustomerFormData) {
-    const updatedCustomer: Customer = {
-      ...customer,
-      ...data,
-    };
+  const updatedCustomer: Customer = {
+    ...customer,
+    ...data,
+  };
 
-    const updatedCustomers = customers.map((item) =>
-      item.id === customer.id ? updatedCustomer : item
-    );
+  const updatedCustomers = customers.map((item) =>
+    item.id === customer.id ? updatedCustomer : item
+  );
 
-    setCustomers(updatedCustomers);
-    setOpen(false);
-  }
+  setCustomers(updatedCustomers);
+
+  toast.success("Customer updated successfully!");
+
+  setOpen(false);
+}
 
   return (
     <>
